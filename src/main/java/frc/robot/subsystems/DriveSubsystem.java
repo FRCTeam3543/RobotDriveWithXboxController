@@ -100,8 +100,7 @@ public class DriveSubsystem extends Subsystem {
    * Stop the drivetrain from moving.
    */
   public void stop() {
-	m_drive.tankDrive(0, 0);
-//	m_drive.arcadeDrive(0, 0);
+	m_drive.stopMotor();
  }
 
 }
