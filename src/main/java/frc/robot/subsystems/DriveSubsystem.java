@@ -23,7 +23,6 @@ public class DriveSubsystem extends Subsystem {
 	//	private Compressor airpusher;
 	private DoubleSolenoid doubleSolenoid; 
 
-	// Put methods for controlling this subsystem here. Call these from Commands.
 	/**
 	 * Subsystem Devices
 	 */
@@ -44,6 +43,9 @@ public class DriveSubsystem extends Subsystem {
 	
 	private final DifferentialDrive m_drive;
 
+	/**
+	 * DriveSubsytem Constructure
+	 */
 	public DriveSubsystem(){
 		super();
 
@@ -86,8 +88,7 @@ public class DriveSubsystem extends Subsystem {
     m_drive.tankDrive(leftAxis, rightAxis);
   }
 
-
-	/**
+  	/**
 	 * Get the value from the left stick
 	 * 
 	 * @param xSpeed Left side values
@@ -96,11 +97,11 @@ public class DriveSubsystem extends Subsystem {
 	public void arcadeDrive(double xSpeed, double zRotate){
 		m_drive.arcadeDrive(xSpeed, zRotate, true);
 	}
+
   /**
    * Stop the drivetrain from moving.
    */
   public void stop() {
 	m_drive.stopMotor();
- }
-
+	}
 }

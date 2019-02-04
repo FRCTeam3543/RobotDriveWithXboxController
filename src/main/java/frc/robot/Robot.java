@@ -23,9 +23,11 @@ import frc.robot.subsystems.DriveSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-
-  // Instantiation of subsystems
   // public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+  
+  /**
+  * Instantiation of subsystems
+  */
   public static DriveSubsystem driveSystem = new DriveSubsystem(); // manages driveline sensors and acutators
   public static Config config = new Config();
   public static OI m_oi;
@@ -39,8 +41,10 @@ public class Robot extends TimedRobot {
 
   public SendableChooser<Command> m_autoChooser;
 
-  // This function is run when the robot is first started up and should be
-  // used for any initialization code.
+  /**
+   * This function is run when the robot is first started up and should be
+   * used for any initialization code.
+   */
   @Override
   public void robotInit() {
     // This MUST be here. If the OI creates Commands (which it very likely
@@ -49,7 +53,6 @@ public class Robot extends TimedRobot {
     // yet. Thus, their requires() statements may grab null pointers. Bad
     // news. Don't move it.
     m_oi = new OI();
-
     // instantiate the command used for the autonomous period
     m_autoChooser = new SendableChooser<Command>();
   }

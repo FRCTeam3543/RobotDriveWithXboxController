@@ -8,15 +8,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.Config;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public XboxController xbox = new XboxController(0);
+	public XboxController xbox = new XboxController(Config.XBOX_PORT);
 
-	// Instantiaion of joysticks/Xbox
+	// Instantiaion of Xbox
 	public XboxController getJoystick() {
 		return xbox;
 	  }

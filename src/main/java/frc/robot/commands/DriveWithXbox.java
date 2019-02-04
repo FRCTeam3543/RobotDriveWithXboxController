@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
 
 /**
@@ -28,7 +27,9 @@ public class DriveWithXbox extends Command {
     if (Robot.m_oi.xbox.getBButtonPressed()) {
       usingArcadeDrive = !usingArcadeDrive;
     }
-
+    /**
+     * This if statement makes it so its a switch between arcade/Tank
+     */
     if (usingArcadeDrive) {
       this.arcadeDrive(Robot.m_oi.getJoystick());
     }

@@ -9,13 +9,12 @@ package frc.robot.subsystems;
 
 
 public class Config {
-    //////////////////// OPERATOR INTERFACE //////
-
+    ////// OPERATOR INTERFACE //////
+    public static final int XBOX_PORT  = 0;
+    
     // Drivetrain speed controllers (No drivetrain speed controllers here!MWUHAHA)
-  
+
         ///// Drivey Motor Ports /////////
-    	//
-	    // DriveLine
         public static final int DRIVELINE_LEFT_FRONT_MOTOR_PORT 		= 4;
         public static final int DRIVELINE_LEFT_MIDDLE_MOTOR_PORT 		= 5;
         public static final int DRIVELINE_LEFT_REAR_MOTOR_PORT 			= 6;
@@ -27,12 +26,12 @@ public class Config {
   
     // PCM Channels
 
-
     // Digital Input Ports
     public static final int COMPRESSOR_PORT 						= 5;
 	public static final int DRIVELINE_SOLENOID_PORT_1 				= 6;
 	public static final int DRIVELINE_SOLENOID_PORT_2				= 7;
-     // Drivetrain Encoder Ports
+     
+    // Drivetrain Encoder Ports
 
  
     // Intake Ultrasonic Ports
