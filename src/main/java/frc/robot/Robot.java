@@ -7,7 +7,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+import java.util.logging.Logger;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -15,9 +16,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.*;
-
-import java.util.logging.Logger;
+import frc.robot.subsystems.BallPickupSubsystem;
+import frc.robot.subsystems.Config;
+import frc.robot.subsystems.DistanceSensor;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LineSensor;
 
 /*
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +31,8 @@ import java.util.logging.Logger;
  */
 public class Robot extends TimedRobot {
   public static final Logger LOGGER = Logger.getLogger("Robot");
+
+  // public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 
   /**
   * Instantiation of subsystems
@@ -41,6 +46,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
 
   public static State state = new State();
+
 
   // Instantiations of commands used in Robot
   Command m_autonomousCommand;
@@ -117,7 +123,6 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     updateOperatorInterface();
     LiveWindow.updateValues();
-
   }
 
   // This function called periodically during test mode

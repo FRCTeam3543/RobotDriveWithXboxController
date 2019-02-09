@@ -37,6 +37,7 @@ public class CenterDropDetection {
 		// first, see if we have at least two lines
 		if (pipeline.filterLinesOutput().size() < 2) {
 			LOGGER.info("Did not find 2 lines: "+pipeline.filterLinesOutput().size());
+			LOGGER.info("Did not fing 2 lines");
 			return result;
 		}
 		else if (pipeline.filterLinesOutput().size() > 30) {

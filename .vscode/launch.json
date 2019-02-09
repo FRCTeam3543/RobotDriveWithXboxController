@@ -6,6 +6,7 @@
   "configurations": [
     {
       "type": "java",
+<<<<<<< HEAD
       "name": "CodeLens (Launch) - GripPipeline1",
       "request": "launch",
       "mainClass": "team3543.vision.GripPipeline1",
@@ -13,6 +14,8 @@
     },
     {
       "type": "java",
+=======
+>>>>>>> Update/ Chaged arcade drive.
       "name": "CodeLens (Launch) - Main",
       "request": "launch",
       "mainClass": "frc.robot.Main",

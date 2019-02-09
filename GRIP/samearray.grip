@@ -47,12 +47,21 @@
     <grip:Step name="Filter Lines">
       <grip:Input step="3" socket="0"/>
       <grip:Input step="3" socket="1">
+<<<<<<< HEAD
         <value>5.0</value>
       </grip:Input>
       <grip:Input step="3" socket="2">
         <value>
           <double>197.48201438848918</double>
           <double>338.60780984719867</double>
+=======
+        <value>0.0</value>
+      </grip:Input>
+      <grip:Input step="3" socket="2">
+        <value>
+          <double>233.0935251798561</double>
+          <double>308.04753820033955</double>
+>>>>>>> Update/ Chaged arcade drive.
         </value>
       </grip:Input>
       <grip:Output step="3" socket="0" previewed="true"/>
@@ -60,20 +69,34 @@
   </steps>
   <connections>
     <grip:Connection>
+<<<<<<< HEAD
       <grip:Output step="1" socket="0" previewed="true"/>
       <grip:Input step="2" socket="0"/>
     </grip:Connection>
     <grip:Connection>
       <grip:Output step="2" socket="0" previewed="false"/>
       <grip:Input step="3" socket="0"/>
+=======
+      <grip:Output step="0" socket="0" previewed="true"/>
+      <grip:Input step="1" socket="0"/>
+>>>>>>> Update/ Chaged arcade drive.
     </grip:Connection>
     <grip:Connection>
       <grip:Output source="1" socket="0" previewed="true"/>
       <grip:Input step="0" socket="0"/>
     </grip:Connection>
     <grip:Connection>
+<<<<<<< HEAD
       <grip:Output step="0" socket="0" previewed="true"/>
       <grip:Input step="1" socket="0"/>
+=======
+      <grip:Output step="2" socket="0" previewed="false"/>
+      <grip:Input step="3" socket="0"/>
+    </grip:Connection>
+    <grip:Connection>
+      <grip:Output step="1" socket="0" previewed="true"/>
+      <grip:Input step="2" socket="0"/>
+>>>>>>> Update/ Chaged arcade drive.
     </grip:Connection>
   </connections>
   <settings>
@@ -89,8 +112,13 @@
     <language>Java</language>
     <className>GripPipeline</className>
     <implementWpilibPipeline>false</implementWpilibPipeline>
+<<<<<<< HEAD
     <saveDir>/Users/mk/Projects/FRC/season2019/RobotDriveWithXboxController/src/main/java/team3543/vision</saveDir>
     <packageName>team3543.vision</packageName>
+=======
+    <saveDir>/Users/mk/GRIP</saveDir>
+    <packageName></packageName>
+>>>>>>> Update/ Chaged arcade drive.
     <moduleName>grip</moduleName>
   </codeGenerationSettings>
 </grip:Pipeline>

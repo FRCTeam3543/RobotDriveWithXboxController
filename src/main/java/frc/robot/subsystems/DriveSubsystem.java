@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import frc.robot.commands.DriveWithXbox;
 
 /**
  * This is the DriveSubsystem or so called drivetrain or driving thingy's
@@ -24,7 +23,6 @@ import frc.robot.commands.DriveWithXbox;
 public class DriveSubsystem extends Subsystem {
 	//	private Compressor airpusher;
 	private DoubleSolenoid doubleSolenoid;
-
 	private AnalogGyro gyro = new AnalogGyro(Config.GYRO_PORT);
 
 	/**
@@ -32,18 +30,16 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	////////LEFT////////
 	WPI_TalonSRX leftFrontTalonSRX = new WPI_TalonSRX(Config.DRIVELINE_LEFT_FRONT_MOTOR_PORT);
-	WPI_TalonSRX leftMiddleTalonSRX = new WPI_TalonSRX(Config.DRIVELINE_LEFT_MIDDLE_MOTOR_PORT);
 	WPI_TalonSRX leftRearTalonSRX = new WPI_TalonSRX(Config.DRIVELINE_LEFT_REAR_MOTOR_PORT);
 	////////Right////////
 	WPI_TalonSRX rightFrontTalonSRX = new WPI_TalonSRX(Config.DRIVELINE_RIGHT_FRONT_MOTOR_PORT);
-	WPI_TalonSRX rightMiddleTalonSRX = new WPI_TalonSRX(Config.DRIVELINE_RIGHT_MIDDLE_MOTOR_PORT);
 	WPI_TalonSRX rightRearTalonSRX = new WPI_TalonSRX(Config.DRIVELINE_RIGHT_REAR_MOTOR_PORT);
 
 	////////////////////
 	//////  Group //////
 	////////////////////
-	private final SpeedControllerGroup LeftSide = new SpeedControllerGroup(leftFrontTalonSRX, leftMiddleTalonSRX, leftRearTalonSRX);
-	private final SpeedControllerGroup RightSide = new SpeedControllerGroup(rightFrontTalonSRX, rightMiddleTalonSRX, rightRearTalonSRX);
+	private final SpeedControllerGroup LeftSide = new SpeedControllerGroup(leftFrontTalonSRX, leftRearTalonSRX);
+	private final SpeedControllerGroup RightSide = new SpeedControllerGroup(rightFrontTalonSRX, rightRearTalonSRX);
 	
 	private final DifferentialDrive m_drive;
 
@@ -52,21 +48,18 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public DriveSubsystem(){
 		super();
-
 		setName("Drive Subsystem");
 
 		leftFrontTalonSRX.setNeutralMode(NeutralMode.Brake);
 		rightFrontTalonSRX.setNeutralMode(NeutralMode.Brake);
 
 		//left side
-		leftMiddleTalonSRX.follow(leftFrontTalonSRX);
 		leftRearTalonSRX.follow(leftFrontTalonSRX);
 		//Right side
-		rightMiddleTalonSRX.follow(rightFrontTalonSRX);
 		rightRearTalonSRX.follow(rightFrontTalonSRX);
 
-		LeftSide.setInverted(false);
-		RightSide.setInverted(false);
+		LeftSide.setInverted(true);
+		RightSide.setInverted(true);
 
 		m_drive = new DifferentialDrive(LeftSide, RightSide);
 		
@@ -92,7 +85,7 @@ public class DriveSubsystem extends Subsystem {
   public void initDefaultCommand() {
 //  		setDefaultCommand(new DriveWithXbox());
   }
-
+  
   /**
    * Tank drive using individual joystick axes.
    *
@@ -110,7 +103,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param zRotate
 	 */
 	public void arcadeDrive(double xSpeed, double zRotate){
-		m_drive.arcadeDrive(-xSpeed, zRotate, true);
+		m_drive.arcadeDrive(xSpeed, zRotate, true);
 	}
 
   /**
@@ -119,7 +112,6 @@ public class DriveSubsystem extends Subsystem {
   public void stop() {
 	m_drive.stopMotor();
 	}
-
 
 	public void reset() {
 	  	stop();
