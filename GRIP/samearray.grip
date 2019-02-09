@@ -47,12 +47,12 @@
     <grip:Step name="Filter Lines">
       <grip:Input step="3" socket="0"/>
       <grip:Input step="3" socket="1">
-        <value>0.0</value>
+        <value>5.0</value>
       </grip:Input>
       <grip:Input step="3" socket="2">
         <value>
-          <double>233.0935251798561</double>
-          <double>308.04753820033955</double>
+          <double>197.48201438848918</double>
+          <double>338.60780984719867</double>
         </value>
       </grip:Input>
       <grip:Output step="3" socket="0" previewed="true"/>
@@ -60,20 +60,20 @@
   </steps>
   <connections>
     <grip:Connection>
-      <grip:Output step="0" socket="0" previewed="true"/>
-      <grip:Input step="1" socket="0"/>
-    </grip:Connection>
-    <grip:Connection>
-      <grip:Output source="1" socket="0" previewed="true"/>
-      <grip:Input step="0" socket="0"/>
+      <grip:Output step="1" socket="0" previewed="true"/>
+      <grip:Input step="2" socket="0"/>
     </grip:Connection>
     <grip:Connection>
       <grip:Output step="2" socket="0" previewed="false"/>
       <grip:Input step="3" socket="0"/>
     </grip:Connection>
     <grip:Connection>
-      <grip:Output step="1" socket="0" previewed="true"/>
-      <grip:Input step="2" socket="0"/>
+      <grip:Output source="1" socket="0" previewed="true"/>
+      <grip:Input step="0" socket="0"/>
+    </grip:Connection>
+    <grip:Connection>
+      <grip:Output step="0" socket="0" previewed="true"/>
+      <grip:Input step="1" socket="0"/>
     </grip:Connection>
   </connections>
   <settings>
@@ -89,8 +89,8 @@
     <language>Java</language>
     <className>GripPipeline</className>
     <implementWpilibPipeline>false</implementWpilibPipeline>
-    <saveDir>/Users/mk/GRIP</saveDir>
-    <packageName></packageName>
+    <saveDir>/Users/mk/Projects/FRC/season2019/RobotDriveWithXboxController/src/main/java/team3543/vision</saveDir>
+    <packageName>team3543.vision</packageName>
     <moduleName>grip</moduleName>
   </codeGenerationSettings>
 </grip:Pipeline>

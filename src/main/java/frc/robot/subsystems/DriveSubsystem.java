@@ -10,10 +10,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import frc.robot.commands.DriveWithXbox;
 
 /**
@@ -21,7 +23,9 @@ import frc.robot.commands.DriveWithXbox;
  */
 public class DriveSubsystem extends Subsystem {
 	//	private Compressor airpusher;
-	private DoubleSolenoid doubleSolenoid; 
+	private DoubleSolenoid doubleSolenoid;
+
+	private AnalogGyro gyro = new AnalogGyro(Config.GYRO_PORT);
 
 	/**
 	 * Subsystem Devices
@@ -49,6 +53,8 @@ public class DriveSubsystem extends Subsystem {
 	public DriveSubsystem(){
 		super();
 
+		setName("Drive Subsystem");
+
 		leftFrontTalonSRX.setNeutralMode(NeutralMode.Brake);
 		rightFrontTalonSRX.setNeutralMode(NeutralMode.Brake);
 
@@ -59,14 +65,23 @@ public class DriveSubsystem extends Subsystem {
 		rightMiddleTalonSRX.follow(rightFrontTalonSRX);
 		rightRearTalonSRX.follow(rightFrontTalonSRX);
 
-		LeftSide.setInverted(true);
-		RightSide.setInverted(true);
+		LeftSide.setInverted(false);
+		RightSide.setInverted(false);
 
 		m_drive = new DifferentialDrive(LeftSide, RightSide);
 		
 		m_drive.setSafetyEnabled(false);
 
 		doubleSolenoid = new DoubleSolenoid(Config.DRIVELINE_SOLENOID_PORT_1, Config.DRIVELINE_SOLENOID_PORT_2);
+
+		gyro.setSensitivity(Config.GYRO_SENSITIVITY);
+		gyro.calibrate();
+
+		gyro.setName("Gyro");
+		m_drive.setName("Robot Drive");
+		LeftSide.setName("Left Wheels");
+		RightSide.setName("Right Wheels");
+		reset();
 	}
 	
 /**
@@ -75,8 +90,8 @@ public class DriveSubsystem extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new DriveWithXbox());
-	}
+//  		setDefaultCommand(new DriveWithXbox());
+  }
 
   /**
    * Tank drive using individual joystick axes.
@@ -95,7 +110,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @param zRotate
 	 */
 	public void arcadeDrive(double xSpeed, double zRotate){
-		m_drive.arcadeDrive(xSpeed, zRotate, true);
+		m_drive.arcadeDrive(-xSpeed, zRotate, true);
 	}
 
   /**
@@ -103,5 +118,39 @@ public class DriveSubsystem extends Subsystem {
    */
   public void stop() {
 	m_drive.stopMotor();
+	}
+
+
+	public void reset() {
+	  	stop();
+  		gyro.reset();
+  		resetEncoders();
+	}
+
+	public void resetEncoders() {
+		leftFrontTalonSRX.getSensorCollection().setQuadraturePosition(0,0);
+		rightFrontTalonSRX.getSensorCollection().setQuadraturePosition(0,0);
+	}
+
+	public double getHeading() {
+	  	return this.gyro.getAngle();
+	}
+
+	public void initOperatorInterface() {
+		addChild(gyro);
+		addChild(m_drive);
+		addChild(LeftSide);
+		addChild(RightSide);
+		addChild(leftFrontTalonSRX.getSensorCollection());
+		addChild(rightFrontTalonSRX.getSensorCollection());
+		LiveWindow.add(this);
+	}
+
+	public double getLeftQuadPosition() {
+  		return leftFrontTalonSRX.getSensorCollection().getQuadraturePosition() * Config.DRIVE_LEFT_QUAD_DPP;
+	}
+
+	public double getRightQuadPosition() {
+  		return rightFrontTalonSRX.getSensorCollection().getQuadraturePosition() * Config.DRIVE_RIGHT_QUAD_DPP;
 	}
 }
