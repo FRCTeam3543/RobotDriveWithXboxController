@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - GripPipeline1",
+      "request": "launch",
+      "mainClass": "team3543.vision.GripPipeline1",
+      "projectName": "RobotDriveWithXboxController"
+    },
+    {
+      "type": "java",
       "name": "CodeLens (Launch) - Main",
       "request": "launch",
       "mainClass": "frc.robot.Main",
