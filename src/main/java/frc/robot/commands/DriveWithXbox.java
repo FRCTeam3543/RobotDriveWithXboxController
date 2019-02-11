@@ -45,7 +45,7 @@ public class DriveWithXbox extends Command {
 	 *    
 	 */
 	void arcadeDrive(XboxController xbox){
-		Robot.driveSystem.arcadeDrive(xbox.getRawAxis(1), -xbox.getRawAxis(0));
+		Robot.driveSystem.arcadeDrive(xbox.getRawAxis(1), xbox.getRawAxis(0));
   }
   
 /**
