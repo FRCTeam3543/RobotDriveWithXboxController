@@ -16,11 +16,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.BallPickupSubsystem;
+import frc.robot.subsystems.BallSubsystem;
 import frc.robot.subsystems.Config;
 import frc.robot.subsystems.DistanceSensor;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HatchSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.LineSensor;
+import frc.robot.subsystems.RampyDrop;
 
 /*
  * The VM is configured to automatically run this class, and to call the
@@ -37,11 +40,13 @@ public class Robot extends TimedRobot {
   /**
   * Instantiation of subsystems
   */
+  public static BallSubsystem bally = new BallSubsystem();
   public static DriveSubsystem driveSystem = new DriveSubsystem(); // manages driveline sensors and acutators
-  public static BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
   public static LineSensor lineSensor = new LineSensor();
   public static DistanceSensor distanceSensor = new DistanceSensor();
-
+  public static LiftSubsystem lifty = new LiftSubsystem();
+  public static RampyDrop Rampy = new RampyDrop();
+  public static HatchSubsystem Hatch = new HatchSubsystem();
   public static Config config = new Config();
   public static OI m_oi;
 
@@ -73,7 +78,7 @@ public class Robot extends TimedRobot {
     m_autoChooser = new SendableChooser<Command>();
 
     initOperatorInterface();
-
+    lifty.reset();
   }
 
   @Override
@@ -105,13 +110,17 @@ public class Robot extends TimedRobot {
     updateState();
     m_oi.loop();
 
+    lifty.periodic();
+    Rampy.periodic();
     // if the ball pickup is enabled, this will run it
-    ballPickupSubsystem.periodic();
-
+    Hatch.periodic();
 
     if (m_oi.xbox.getXButtonPressed()) {
       lineFollowing = !lineFollowing;
       SmartDashboard.putBoolean("Line following", lineFollowing);
+    }
+    if (m_oi.xbox.getYButtonPressed()) {
+      reset();
     }
     if (lineFollowing) {
       followLine();
@@ -148,15 +157,16 @@ public class Robot extends TimedRobot {
 
   void reset() {
     driveSystem.reset();
+    lifty.reset();
   }
   /**
    * Add stuff to the OI
    */
   void initOperatorInterface() {
     driveSystem.initOperatorInterface();
-    ballPickupSubsystem.initOperatorInterface();
     lineSensor.initOperatorInterface();
     distanceSensor.initOperatorInterface();
+    lifty.initOperatorInterface();
   }
 
   /**
@@ -194,7 +204,7 @@ public class Robot extends TimedRobot {
   }
 
   void arcadeDrive() {
-      arcadeDrive(m_oi.xbox.getRawAxis(1), m_oi.xbox.getRawAxis(0));
+      arcadeDrive(m_oi.xbox.getRawAxis(1), -m_oi.xbox.getRawAxis(0));
   }
 
   void arcadeDrive(double mag, double turn) {

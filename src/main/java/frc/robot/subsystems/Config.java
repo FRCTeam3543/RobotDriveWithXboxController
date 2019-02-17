@@ -11,19 +11,40 @@ public class Config {
     ////// OPERATOR INTERFACE //////
     public static final int XBOX_PORT  = 0;
     // Drivetrain speed controllers (No drivetrain speed controllers here!MWUHAHA)
+    
+    /////Lift System//////
+    public static final int LIFT_MOTOR_PORT = 7;
+    public static final double LIFT_SPEED_UP = 0.5;
+    public static final double LIFT_STAY = 0.1;
 
-        ///// Drivey Motor Ports /////////
-        public static final int DRIVELINE_LEFT_FRONT_MOTOR_PORT 		= 4;
-        public static final int DRIVELINE_LEFT_REAR_MOTOR_PORT 			= 6;
-        public static final int DRIVELINE_RIGHT_FRONT_MOTOR_PORT 		= 1;
-        public static final int DRIVELINE_RIGHT_REAR_MOTOR_PORT 		= 3;
+    ///// Drivey Motor Ports /////////
+    public static final int DRIVELINE_LEFT_FRONT_MOTOR_PORT 		= 4;
+    public static final int DRIVELINE_LEFT_REAR_MOTOR_PORT 			= 6;
+    public static final int DRIVELINE_RIGHT_FRONT_MOTOR_PORT 		= 1;
+    public static final int DRIVELINE_RIGHT_REAR_MOTOR_PORT 		= 3;
 
+    ////////////////////////////////////
+    ///////// Hatch Pneumatics /////////
+    ////////////////////////////////////
+    public static final int HATCH_PORT_0 = 0;
+    public static final int HATCH_PORT_1 = 1;
+
+    ///////////////////////////////////
+    ///////// Ramp Pneumatics /////////
+    ///////////////////////////////////
+    public static final int RAMP_PORT_2 = 2;
+    public static final int RAMP_PORT_3 = 3;
 
     public static final double DRIVE_LEFT_QUAD_DPP = 0.00003844376;    // meters per pulse, measured 2/9/19
     public static final double DRIVE_RIGHT_QUAD_DPP = -DRIVE_LEFT_QUAD_DPP;
 
-    public static final int BALL_PICKUP_MOTOR_PORT                  = 5;
-    public static final double BALL_PICKUP_MOTOR_SPEED              = 0.5;
+    /////////////////////////////////
+    ///////// Ball Subsytem /////////
+    /////////////////////////////////
+    public static final int BALL_PICKUP_MOTOR_PORT_2 = 2;
+    public static final int BALL_PICKUP_MOTOR_PORT_1 = 5;
+    public static final double BALL_PICKUP_MOTOR_SPEED = 0.5;
+    public static final double BALL_SHOOT_MOTOR_SPEED = 1.0;
 
     // Digital Ports
     public static final int BALL_PICKUP_SWITCH_PORT = 1;
@@ -33,7 +54,9 @@ public class Config {
     // PCM Channels
     public static final int COMPRESSOR_PORT 						= 5;
 	public static final int DRIVELINE_SOLENOID_PORT_1 				= 6;
-	public static final int DRIVELINE_SOLENOID_PORT_2				= 7;
+    public static final int DRIVELINE_SOLENOID_PORT_2				= 7;
+    
+    //Gyro
     public static final double GYRO_SENSITIVITY = 0.007;
     public static final int GYRO_PORT = 0;
 
@@ -44,8 +67,10 @@ public class Config {
 	// OI Buttons etc
     public static final int BALL_PICKUP_TOGGLE_BUTTON               = 1;
 
-    // Drivetrain Encoder Ports
-    // Intake speed controllers
-    // Intake Ultrasonic Ports
+    //PID's
+    public static final double BALL_PICKUP_PID_KP = 1.5708;  // based on full output at pi/2 error
+    public static final double BALL_PICKUP_PID_KI = 0.0;
+    public static final double BALL_PICKUP_PID_KD = 0.0;
+    public static final double BALL_PICKUP_ENCODER_DPP = 1 / 162974.66; // radians per pulse (4096 pulses per cycle and gear ratio of 250)
 
 }

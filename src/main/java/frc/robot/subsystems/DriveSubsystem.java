@@ -41,7 +41,7 @@ public class DriveSubsystem extends Subsystem {
 	private final SpeedControllerGroup LeftSide = new SpeedControllerGroup(leftFrontTalonSRX, leftRearTalonSRX);
 	private final SpeedControllerGroup RightSide = new SpeedControllerGroup(rightFrontTalonSRX, rightRearTalonSRX);
 	
-	private final DifferentialDrive m_drive;
+	public DifferentialDrive m_drive;
 
 	/**
 	 * DriveSubsytem Constructure
@@ -82,19 +82,7 @@ public class DriveSubsystem extends Subsystem {
    * the joystick.
    */
   @Override
-  public void initDefaultCommand() {
-//  		setDefaultCommand(new DriveWithXbox());
-  }
-  
-  /**
-   * Tank drive using individual joystick axes.
-   *
-   * @param leftAxis Left sides value
-   * @param rightAxis Right sides value
-   */
-  public void tankDrive(double leftAxis, double rightAxis) {
-    m_drive.tankDrive(leftAxis, rightAxis);
-  }
+  public void initDefaultCommand() {}
 
   	/**
 	 * Get the value from the left stick
@@ -105,7 +93,7 @@ public class DriveSubsystem extends Subsystem {
 	public void arcadeDrive(double xSpeed, double zRotate){
 		m_drive.arcadeDrive(xSpeed, zRotate, true);
 	}
-
+	
   /**
    * Stop the drivetrain from moving.
    */

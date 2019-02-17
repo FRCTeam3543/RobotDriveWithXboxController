@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.subsystems.Config;
 
 /**
@@ -23,15 +22,10 @@ public class OI {
 		return xbox;
 	  }
 
-JoystickButton toggleBallPickupButton;
-
 	OI() {
 	}
 
 	void loop() {
-		if (xbox.getAButtonPressed()) {
-			Robot.ballPickupSubsystem.toggleEnabled();
-		}
 		if (xbox.getYButtonPressed()) {
 			Robot.driveSystem.reset();
 		}
