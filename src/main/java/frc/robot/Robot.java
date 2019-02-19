@@ -16,14 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.BallSubsystem;
-import frc.robot.subsystems.Config;
-import frc.robot.subsystems.DistanceSensor;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.HatchSubsystem;
-import frc.robot.subsystems.LiftSubsystem;
-import frc.robot.subsystems.LineSensor;
-import frc.robot.subsystems.RampyDrop;
+import frc.robot.subsystems.*;
 
 /*
  * The VM is configured to automatically run this class, and to call the
@@ -40,13 +33,15 @@ public class Robot extends TimedRobot {
   /**
   * Instantiation of subsystems
   */
-  public static BallSubsystem bally = new BallSubsystem();
-  public static DriveSubsystem driveSystem = new DriveSubsystem(); // manages driveline sensors and acutators
-  public static LineSensor lineSensor = new LineSensor();
-  public static DistanceSensor distanceSensor = new DistanceSensor();
-  public static LiftSubsystem lifty = new LiftSubsystem();
-  public static RampyDrop Rampy = new RampyDrop();
-  public static HatchSubsystem Hatch = new HatchSubsystem();
+  public static final BallSubsystem bally = new BallSubsystem();
+  public static final DriveSubsystem driveSystem = new DriveSubsystem(); // manages driveline sensors and acutators
+  public static final LineSensor lineSensor = new LineSensor();
+  public static final DistanceSensor distanceSensor = new DistanceSensor();
+  public static final LiftSubsystem lifty = new LiftSubsystem();
+  public static final RampyDrop Rampy = new RampyDrop();
+  public static final HatchSubsystem Hatch = new HatchSubsystem();
+  public static final CameraSubsystem looky = new CameraSubsystem();
+
   public static Config config = new Config();
   public static OI m_oi;
 
@@ -79,12 +74,21 @@ public class Robot extends TimedRobot {
 
     initOperatorInterface();
     lifty.reset();
+    driveSystem.calibrate();
+    driveSystem.reset();
+    looky.initCameraThread();
   }
 
   @Override
   public void autonomousInit() {
     m_autonomousCommand = (Command) m_autoChooser.getSelected();
     m_autonomousCommand.start();
+  }
+
+  @Override
+  protected void finalize() {
+    looky.stopCameraThread();
+    super.finalize();
   }
 
   // This function is called periodically during autonomous
@@ -119,14 +123,11 @@ public class Robot extends TimedRobot {
       lineFollowing = !lineFollowing;
       SmartDashboard.putBoolean("Line following", lineFollowing);
     }
-    if (m_oi.xbox.getYButtonPressed()) {
-      reset();
-    }
     if (lineFollowing) {
       followLine();
     }
     else {
-      arcadeDrive();
+      m_oi.arcadeDrive();
     }
 
     Scheduler.getInstance().run();
@@ -199,17 +200,22 @@ public class Robot extends TimedRobot {
       arcadeDrive(mag, turn);
     }
     else { // just arcade drive
-      arcadeDrive();
+      m_oi.arcadeDrive();
     }
   }
 
-  void arcadeDrive() {
-      arcadeDrive(m_oi.xbox.getRawAxis(1), -m_oi.xbox.getRawAxis(0));
+//  void arcadeDrive() {
+//      arcadeDrive(m_oi.xbox.getRawAxis(1), -m_oi.xbox.getRawAxis(0));
+//  }
+
+  static void arcadeDrive(double mag, double turn, boolean squareInputs) {
+    // for some reason this is inverted
+    driveSystem.arcadeDrive(mag, turn, squareInputs);
   }
 
-  void arcadeDrive(double mag, double turn) {
+  static void arcadeDrive(double mag, double turn) {
     // for some reason this is inverted
-    driveSystem.arcadeDrive(mag, turn);
+    arcadeDrive(mag, turn, true);
   }
 
   void updateOperatorInterface() {

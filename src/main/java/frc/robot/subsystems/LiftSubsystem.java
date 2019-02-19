@@ -1,27 +1,31 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class LiftSubsystem extends Subsystem implements PIDSource {
+public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider {
 
-    WPI_TalonSRX liftMotors = new WPI_TalonSRX(Config.LIFT_MOTOR_PORT);
-
-    PIDController positionController = new PIDController(Config.BALL_PICKUP_PID_KP,
-    Config.BALL_PICKUP_PID_KI,
-    Config.BALL_PICKUP_PID_KD,
-    this, liftMotors);
+    final WPI_TalonSRX liftMotors;
+    final Encoder encoder;
+    final PIDController positionController;
 
     public LiftSubsystem(){
-        super();       
+        super();
+        liftMotors = new WPI_TalonSRX(Config.LIFT_MOTOR_PORT);
+        liftMotors.setNeutralMode(NeutralMode.Brake);
+        encoder = new Encoder(Config.LIFT_ENCODER_A, Config.LIFT_ENCODER_B, false, CounterBase.EncodingType.k4X);
+        encoder.setDistancePerPulse(Config.LIFT_ENCODER_DPP);
+        positionController = new PIDController(Config.BALL_PICKUP_PID_KP,
+                Config.BALL_PICKUP_PID_KI,
+                Config.BALL_PICKUP_PID_KD,
+                encoder, liftMotors);
     }
 
     @Override
@@ -74,6 +78,7 @@ public class LiftSubsystem extends Subsystem implements PIDSource {
     }
 
     void disablePid() {
+
         positionController.disable();
     }
 
@@ -82,7 +87,8 @@ public class LiftSubsystem extends Subsystem implements PIDSource {
      * @return
      */
     double getLiftAngle() {
-        return (double)liftMotors.getSensorCollection().getQuadraturePosition() / Config.BALL_PICKUP_ENCODER_DPP;
+        return encoder.getDistance();
+        //        return (double)liftMotors.getSensorCollection().getQuadraturePosition() / Config.BALL_PICKUP_ENCODER_DPP;
     }
 
     PIDSourceType pidSource;
@@ -101,19 +107,26 @@ public class LiftSubsystem extends Subsystem implements PIDSource {
         return getLiftAngle();
 	}
 
-
-
     public void reset() {
+        encoder.reset();
         liftMotors.stopMotor();
-        liftMotors.getSensorCollection().setQuadraturePosition(0, 0);
+//        liftMotors.getSensorCollection().setQuadraturePosition(0, 0);
         disablePid();
     }
 
     public void initOperatorInterface() {
         this.setName("Lifty");
+        addChild(encoder);
         addChild(positionController);
         addChild(liftMotors);
         addChild(liftMotors.getSensorCollection());
         LiveWindow.add(this);
+    }
+
+    public void updateHUD(HUD hud) {
+        double liftAngle = getLiftAngle();
+
+        // Todo - move me based on lift angle
+        hud.color(HUD.YELLOW).crosshair(HUD.relPoint(0.65, 0.35), 20);
     }
 }

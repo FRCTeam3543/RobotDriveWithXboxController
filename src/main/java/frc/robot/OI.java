@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Config;
 
@@ -31,6 +32,22 @@ public class OI {
 		}
 	}
 
+	/**
+	 * Make the controller rumble
+	 */
+	void rumble() {
+		xbox.setRumble(GenericHID.RumbleType.kLeftRumble, Config.RUMBLE_VALUE);
+	}
+
+	void arcadeDrive() {
+		// tricky
+		double mag = xbox.getRawAxis(1);
+		double turn = - xbox.getRawAxis(0);
+		double throttle = 1 - Math.abs(xbox.getRawAxis(5)); // 0 to 1
+		throttle = throttle * (1 - Config.THROTTLE_MIN) + Config.THROTTLE_MIN;
+		// adjust magnitude and turn by the throttle value
+		Robot.arcadeDrive(mag * throttle,  turn * throttle * 1.5, false);
+	}
 }
 	
 

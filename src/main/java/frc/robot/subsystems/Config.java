@@ -10,12 +10,25 @@ package frc.robot.subsystems;
 public class Config {
     ////// OPERATOR INTERFACE //////
     public static final int XBOX_PORT  = 0;
+
+    ////// VISION //////
+    // should be http://10.35.43.11/axis-cgi/mjpg/video.cgi
+    public static final String CAMERA_ADDRESS = "10.35.43.11";
+    public static final int CAMERA_WIDTH = 320;
+    public static final int CAMERA_HEIGHT = 240;
+
     // Drivetrain speed controllers (No drivetrain speed controllers here!MWUHAHA)
     
     /////Lift System//////
     public static final int LIFT_MOTOR_PORT = 7;
     public static final double LIFT_SPEED_UP = 0.5;
     public static final double LIFT_STAY = 0.1;
+
+    public static final int LIFT_ENCODER_A = 4;
+    public static final int LIFT_ENCODER_B = 5;
+
+//    public static final double LIFT_ENCODER_DPP =  1 / 162974.66; // distance-per-pulse, in radians based on 4096 pulses per cycle
+    public static final double LIFT_ENCODER_DPP =  2 * Math.PI / 4096 ; // distance-per-pulse, in radians based on 4096 pulses per cycle
 
     ///// Drivey Motor Ports /////////
     public static final int DRIVELINE_LEFT_FRONT_MOTOR_PORT 		= 4;
@@ -73,4 +86,6 @@ public class Config {
     public static final double BALL_PICKUP_PID_KD = 0.0;
     public static final double BALL_PICKUP_ENCODER_DPP = 1 / 162974.66; // radians per pulse (4096 pulses per cycle and gear ratio of 250)
 
+    public static final double THROTTLE_MIN = 0.5;
+    public static final double RUMBLE_VALUE = 0.7;
 }
