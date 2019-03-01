@@ -19,6 +19,11 @@ public class Config {
 
     // Drivetrain speed controllers (No drivetrain speed controllers here!MWUHAHA)
     
+    ///Elevator (Temp)///
+    public static final int ELEVATOR_MOTOR_PORT = 8; //FIXME
+    public static final double ELEVATOR_MOTOR_SPEED_UP = 0.5;
+    public static final double ELEVATOR_MOTOR_SPEED_DOWN = -0.5;
+
     /////Lift System//////
     public static final int LIFT_MOTOR_PORT = 7;
     public static final double LIFT_SPEED_UP = 0.5;
@@ -86,6 +91,6 @@ public class Config {
     public static final double BALL_PICKUP_PID_KD = 0.0;
     public static final double BALL_PICKUP_ENCODER_DPP = 1 / 162974.66; // radians per pulse (4096 pulses per cycle and gear ratio of 250)
 
-    public static final double THROTTLE_MIN = 0.5;
+    public static final double THROTTLE_MIN = 0.7;
     public static final double RUMBLE_VALUE = 0.7;
 }

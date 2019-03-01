@@ -27,12 +27,7 @@ public class RampyDrop extends Subsystem {
            doubleSolenoid.set(Value.kForward);
         }
         else{
-        closed();
+            doubleSolenoid.set(Value.kReverse);
         }
     }
-   
-    public void closed(){
-        doubleSolenoid.set(Value.kReverse);
-    }
-
 }
