@@ -23,9 +23,6 @@ public class OI {
 		return xbox;
 	  }
 
-	OI() {
-	}
-
 	void loop() {
 		if (xbox.getYButtonPressed()) {
 			Robot.driveSystem.reset();

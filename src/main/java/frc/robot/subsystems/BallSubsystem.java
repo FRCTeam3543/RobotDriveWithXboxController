@@ -36,12 +36,6 @@ public class BallSubsystem extends Subsystem {
         else if(Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft) > 0.55){
             shoot();
         }
-        // else if (hasABall() && !isLockAndLoad()) { // shoot on release
-        //     startShooting();
-        // }
-        // else if (isShooting()) {
-        //     shoot();
-        // }
         else {
             motor.stopMotor();
             motor1.stopMotor();

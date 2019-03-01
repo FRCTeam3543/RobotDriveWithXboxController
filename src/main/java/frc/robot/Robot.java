@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   /**
   * Instantiation of subsystems
   */
+  public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
   public static final BallSubsystem bally = new BallSubsystem();
   public static final DriveSubsystem driveSystem = new DriveSubsystem(); // manages driveline sensors and acutators
   public static final LineSensor lineSensor = new LineSensor();
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
   public static final RampyDrop Rampy = new RampyDrop();
   public static final HatchSubsystem Hatch = new HatchSubsystem();
   public static final CameraSubsystem looky = new CameraSubsystem();
+  
 
   public static Config config = new Config();
   public static OI m_oi;
@@ -113,9 +115,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     updateState();
     m_oi.loop();
-
     lifty.periodic();
     Rampy.periodic();
+    elevator.periodic();
     // if the ball pickup is enabled, this will run it
     Hatch.periodic();
 
