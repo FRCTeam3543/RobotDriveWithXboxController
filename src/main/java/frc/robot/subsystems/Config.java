@@ -21,6 +21,7 @@ public class Config {
     
     /////Lift System//////
     public static final int LIFT_MOTOR_PORT = 7;
+    public static final int LIFT_POT_PORT = 3;
     public static final double LIFT_SPEED_UP = 0.5;
     public static final double LIFT_STAY = 0.1;
 
@@ -81,10 +82,10 @@ public class Config {
     public static final int BALL_PICKUP_TOGGLE_BUTTON               = 1;
 
     //PID's
-    public static final double BALL_PICKUP_PID_KP = 1.5708;  // based on full output at pi/2 error
+    public static final double LIFT_POT_DEGREES_PER_VOLT = 2.486/180;   // half-turn pot with 5v range
+    public static final double BALL_PICKUP_PID_KP = -0.4;  // based on full output at pi/2 error so 2.5v
     public static final double BALL_PICKUP_PID_KI = 0.0;
     public static final double BALL_PICKUP_PID_KD = 0.0;
-    public static final double BALL_PICKUP_ENCODER_DPP = 1 / 162974.66; // radians per pulse (4096 pulses per cycle and gear ratio of 250)
 
     public static final double THROTTLE_MIN = 0.5;
     public static final double RUMBLE_VALUE = 0.7;

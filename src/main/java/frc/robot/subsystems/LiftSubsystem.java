@@ -13,19 +13,21 @@ import frc.robot.Robot;
 public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider {
 
     final WPI_TalonSRX liftMotors;
-    final Encoder encoder;
+    final AnalogInput anglePot;
     final PIDController positionController;
 
     public LiftSubsystem(){
         super();
         liftMotors = new WPI_TalonSRX(Config.LIFT_MOTOR_PORT);
         liftMotors.setNeutralMode(NeutralMode.Brake);
-        encoder = new Encoder(Config.LIFT_ENCODER_A, Config.LIFT_ENCODER_B, false, CounterBase.EncodingType.k4X);
-        encoder.setDistancePerPulse(Config.LIFT_ENCODER_DPP);
+        anglePot = new AnalogInput(Config.LIFT_POT_PORT);
         positionController = new PIDController(Config.BALL_PICKUP_PID_KP,
                 Config.BALL_PICKUP_PID_KI,
                 Config.BALL_PICKUP_PID_KD,
-                encoder, liftMotors);
+                anglePot, liftMotors);
+
+        positionController.setAbsoluteTolerance(0.05);
+        positionController.setOutputRange(-0.5, 0.5);
     }
 
     @Override
@@ -87,7 +89,7 @@ public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider 
      * @return
      */
     double getLiftAngle() {
-        return encoder.getDistance();
+        return anglePot.getVoltage() * Config.LIFT_POT_DEGREES_PER_VOLT;
         //        return (double)liftMotors.getSensorCollection().getQuadraturePosition() / Config.BALL_PICKUP_ENCODER_DPP;
     }
 
@@ -108,7 +110,7 @@ public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider 
 	}
 
     public void reset() {
-        encoder.reset();
+//        encoder.reset();
         liftMotors.stopMotor();
 //        liftMotors.getSensorCollection().setQuadraturePosition(0, 0);
         disablePid();
@@ -116,7 +118,7 @@ public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider 
 
     public void initOperatorInterface() {
         this.setName("Lifty");
-        addChild(encoder);
+        addChild(anglePot);
         addChild(positionController);
         addChild(liftMotors);
         addChild(liftMotors.getSensorCollection());
