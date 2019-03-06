@@ -93,7 +93,7 @@ public class CameraSubsystem extends Subsystem {
         hud .color(detected ? HUD.GREEN : HUD.RED)
             .circle(HUD.point(30,30), 10);
 
-        hud.add(Robot.lifty);
+//        hud.add(Robot.lifty);
 
 //        if (result.detected) {
 //            result.plot(mat);
