@@ -88,4 +88,7 @@ public class Config {
 
     public static final double THROTTLE_MIN = 0.5;
     public static final double RUMBLE_VALUE = 0.7;
+
+    public static final int ELEVATOR_MOTOR_PORT = 7;
+    public static final double ELEVATOR_SPEED = 0.75;
 }

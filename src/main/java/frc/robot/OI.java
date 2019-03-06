@@ -30,6 +30,22 @@ public class OI {
 		if (xbox.getYButtonPressed()) {
 			Robot.driveSystem.reset();
 		}
+
+		if (xbox.getXButton()) {
+			Robot.elevator.down();
+		}
+		else if (xbox.getBButton()) {
+			Robot.elevator.up();
+		}
+		else if (xbox.getBumper(GenericHID.Hand.kRight)) {
+			Robot.elevator.up();
+		}
+		else if (xbox.getBumper(GenericHID.Hand.kLeft)) {
+			Robot.elevator.down();
+		}
+		else {
+			Robot.elevator.stop();
+		}
 	}
 
 	/**
