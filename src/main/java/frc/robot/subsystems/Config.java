@@ -20,26 +20,26 @@ public class Config {
     // Drivetrain speed controllers (No drivetrain speed controllers here!MWUHAHA)
     
     ///Elevator (Temp)///
-    public static final int ELEVATOR_MOTOR_PORT = 8; //FIXME
+    public static final int ELEVATOR_MOTOR_PORT = 8; 
     public static final double ELEVATOR_MOTOR_SPEED_UP = 0.5;
     public static final double ELEVATOR_MOTOR_SPEED_DOWN = -0.5;
 
-    /////Lift System//////
-    public static final int LIFT_MOTOR_PORT = 7;
-    public static final double LIFT_SPEED_UP = 0.5;
-    public static final double LIFT_STAY = 0.1;
+//     /////Lift System//////
+//     public static final int LIFT_MOTOR_PORT = 7;
+//     public static final double LIFT_SPEED_UP = 0.5;
+//     public static final double LIFT_STAY = 0.1;
 
-    public static final int LIFT_ENCODER_A = 4;
-    public static final int LIFT_ENCODER_B = 5;
+//     public static final int LIFT_ENCODER_A = 4;
+//     public static final int LIFT_ENCODER_B = 5;
 
-//    public static final double LIFT_ENCODER_DPP =  1 / 162974.66; // distance-per-pulse, in radians based on 4096 pulses per cycle
-    public static final double LIFT_ENCODER_DPP =  2 * Math.PI / 4096 ; // distance-per-pulse, in radians based on 4096 pulses per cycle
+// //    public static final double LIFT_ENCODER_DPP =  1 / 162974.66; // distance-per-pulse, in radians based on 4096 pulses per cycle
+//     public static final double LIFT_ENCODER_DPP =  2 * Math.PI / 4096 ; // distance-per-pulse, in radians based on 4096 pulses per cycle
 
     ///// Drivey Motor Ports /////////
-    public static final int DRIVELINE_LEFT_FRONT_MOTOR_PORT 		= 4;
-    public static final int DRIVELINE_LEFT_REAR_MOTOR_PORT 			= 6;
-    public static final int DRIVELINE_RIGHT_FRONT_MOTOR_PORT 		= 1;
-    public static final int DRIVELINE_RIGHT_REAR_MOTOR_PORT 		= 3;
+    public static final int DRIVELINE_LEFT_FRONT_MOTOR_PORT 		= 1;
+    public static final int DRIVELINE_LEFT_REAR_MOTOR_PORT 		    = 3;
+    public static final int DRIVELINE_RIGHT_FRONT_MOTOR_PORT 		= 4;
+    public static final int DRIVELINE_RIGHT_REAR_MOTOR_PORT 		= 6;
 
     ////////////////////////////////////
     ///////// Hatch Pneumatics /////////
@@ -59,8 +59,8 @@ public class Config {
     /////////////////////////////////
     ///////// Ball Subsytem /////////
     /////////////////////////////////
-    public static final int BALL_PICKUP_MOTOR_PORT_2 = 2;
-    public static final int BALL_PICKUP_MOTOR_PORT_1 = 5;
+    public static final int BALL_PICKUP_MOTOR_PORT_2 = 5;
+    public static final int BALL_PICKUP_MOTOR_PORT_1 = 2;
     public static final double BALL_PICKUP_MOTOR_SPEED = 0.5;
     public static final double BALL_SHOOT_MOTOR_SPEED = 1.0;
 

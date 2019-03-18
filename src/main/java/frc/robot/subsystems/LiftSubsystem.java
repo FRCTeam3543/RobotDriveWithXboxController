@@ -1,3 +1,4 @@
+/*
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -31,7 +32,7 @@ public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider 
     @Override
     public void periodic() {
         super.periodic();
-        startLift();
+       // startLift();
         SmartDashboard.putNumber("Lifty Encoder", getLiftAngle());
         SmartDashboard.putNumber("PID Setpoint", positionController.getSetpoint());
         SmartDashboard.putNumber("PID Error", positionController.getError());
@@ -82,10 +83,7 @@ public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider 
         positionController.disable();
     }
 
-    /**
-     * Returns encoder position in radians (for the lift)
-     * @return
-     */
+   
     double getLiftAngle() {
         return encoder.getDistance();
         //        return (double)liftMotors.getSensorCollection().getQuadraturePosition() / Config.BALL_PICKUP_ENCODER_DPP;
@@ -130,3 +128,4 @@ public class LiftSubsystem extends Subsystem implements PIDSource, HUD.Provider 
         hud.color(HUD.YELLOW).crosshair(HUD.relPoint(0.65, 0.35), 20);
     }
 }
+*/

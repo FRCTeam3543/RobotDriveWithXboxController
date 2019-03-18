@@ -90,12 +90,9 @@ public class DriveSubsystem extends Subsystem {
 	 * @param xSpeed Left side values
 	 * @param zRotate
 	 */
-	public void arcadeDrive(double xSpeed, double zRotate, boolean squareInputs){
-		m_drive.arcadeDrive(xSpeed, zRotate, squareInputs);
-	}
 
-	public void arcadeDrive(double xSpeed, double zRotate){
-		m_drive.arcadeDrive(xSpeed, zRotate, true);
+	public void arcadeDrive(double xSpeed, double zRotate, boolean squareInputs){
+		m_drive.arcadeDrive(-xSpeed/4, zRotate/4, squareInputs);
 	}
 
   /**

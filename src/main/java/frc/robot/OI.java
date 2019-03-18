@@ -39,7 +39,7 @@ public class OI {
 	void arcadeDrive() {
 		// tricky
 		double mag = xbox.getRawAxis(1);
-		double turn = - xbox.getRawAxis(0);
+		double turn =  xbox.getRawAxis(0);
 		double throttle = 1 - Math.abs(xbox.getRawAxis(5)); // 0 to 1
 		throttle = throttle * (1 - Config.THROTTLE_MIN) + Config.THROTTLE_MIN;
 		// adjust magnitude and turn by the throttle value

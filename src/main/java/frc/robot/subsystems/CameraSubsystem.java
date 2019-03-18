@@ -1,17 +1,15 @@
 package frc.robot.subsystems;
 
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
 import team3543.vision.CenterDropDetection;
-import team3543.vision.GripPipeline1;
 
 public class CameraSubsystem extends Subsystem {
     Thread m_visionThread = null;
@@ -93,7 +91,7 @@ public class CameraSubsystem extends Subsystem {
         hud .color(detected ? HUD.GREEN : HUD.RED)
             .circle(HUD.point(30,30), 10);
 
-        hud.add(Robot.lifty);
+        //hud.add(Robot.lifty);
 
 //        if (result.detected) {
 //            result.plot(mat);

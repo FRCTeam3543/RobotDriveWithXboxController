@@ -15,11 +15,7 @@ import frc.robot.Robot;
  * This command allows Xbox joystick to drive the robot. It is always running
  * except when interrupted by another command.
  */
-public class DriveWithXbox extends Command { 
-
-  public DriveWithXbox() {
-    requires(Robot.driveSystem);
-  }
+public class DriveWithXbox extends Command {
 
   @Override
   protected void execute() {
@@ -33,7 +29,7 @@ public class DriveWithXbox extends Command {
 	 *    
 	 */
 	void arcadeDrive(XboxController xbox){
-		Robot.driveSystem.arcadeDrive(xbox.getRawAxis(1), xbox.getRawAxis(0));
+		Robot.driveSystem.arcadeDrive(xbox.getRawAxis(1), xbox.getRawAxis(0), true);
   }
 
   @Override

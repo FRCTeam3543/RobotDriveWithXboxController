@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 
@@ -18,10 +19,10 @@ public class ElevatorSubsystem extends Subsystem{
     }
 
     public void elevateup(){
-        if(Robot.m_oi.xbox.getPOV(0) == 0){
+        if(Robot.m_oi.xbox.getBumper(Hand.kRight)){
             elevatorMotor.set(Config.ELEVATOR_MOTOR_SPEED_UP);
         }
-        else if(Robot.m_oi.xbox.getPOV(180) == 180){
+        else if(Robot.m_oi.xbox.getBumper(Hand.kLeft)){
             elevatorMotor.set(Config.ELEVATOR_MOTOR_SPEED_DOWN);
         }
         else{

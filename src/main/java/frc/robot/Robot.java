@@ -33,12 +33,12 @@ public class Robot extends TimedRobot {
   /**
   * Instantiation of subsystems
   */
-  public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+  //public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
   public static final BallSubsystem bally = new BallSubsystem();
   public static final DriveSubsystem driveSystem = new DriveSubsystem(); // manages driveline sensors and acutators
   public static final LineSensor lineSensor = new LineSensor();
   public static final DistanceSensor distanceSensor = new DistanceSensor();
-  public static final LiftSubsystem lifty = new LiftSubsystem();
+  //public static final LiftSubsystem lifty = new LiftSubsystem();
   public static final RampyDrop Rampy = new RampyDrop();
   public static final HatchSubsystem Hatch = new HatchSubsystem();
   public static final CameraSubsystem looky = new CameraSubsystem();
@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
     m_autoChooser = new SendableChooser<Command>();
 
     initOperatorInterface();
-    lifty.reset();
+   // lifty.reset();
     driveSystem.calibrate();
     driveSystem.reset();
     looky.initCameraThread();
@@ -115,9 +115,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     updateState();
     m_oi.loop();
-    lifty.periodic();
+    //lifty.periodic();
     Rampy.periodic();
-    elevator.periodic();
+    //elevator.periodic();
     // if the ball pickup is enabled, this will run it
     Hatch.periodic();
 
@@ -160,7 +160,7 @@ public class Robot extends TimedRobot {
 
   void reset() {
     driveSystem.reset();
-    lifty.reset();
+   // lifty.reset();
   }
   /**
    * Add stuff to the OI
@@ -169,7 +169,7 @@ public class Robot extends TimedRobot {
     driveSystem.initOperatorInterface();
     lineSensor.initOperatorInterface();
     distanceSensor.initOperatorInterface();
-    lifty.initOperatorInterface();
+    //lifty.initOperatorInterface();
   }
 
   /**
