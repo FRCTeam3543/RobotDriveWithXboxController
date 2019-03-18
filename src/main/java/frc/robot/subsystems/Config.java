@@ -20,7 +20,7 @@ public class Config {
     // Drivetrain speed controllers (No drivetrain speed controllers here!MWUHAHA)
     
     ///Elevator (Temp)///
-    public static final int ELEVATOR_MOTOR_PORT = 8; 
+    public static final int ELEVATOR_MOTOR_PORT = 7; 
     public static final double ELEVATOR_MOTOR_SPEED_UP = 0.5;
     public static final double ELEVATOR_MOTOR_SPEED_DOWN = -0.5;
 
