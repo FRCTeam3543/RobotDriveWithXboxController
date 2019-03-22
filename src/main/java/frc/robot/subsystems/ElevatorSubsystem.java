@@ -26,7 +26,7 @@ public class ElevatorSubsystem extends Subsystem{
             elevatorMotor.set(Config.ELEVATOR_MOTOR_SPEED_DOWN);
         }
         else{
-            //Nothing
+            elevatorMotor.set(Config.ELEVATOR_MOTOR_STAY);
         }
     }
 }

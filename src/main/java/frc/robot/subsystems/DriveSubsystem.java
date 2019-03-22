@@ -92,7 +92,7 @@ public class DriveSubsystem extends Subsystem {
 	 */
 
 	public void arcadeDrive(double xSpeed, double zRotate, boolean squareInputs){
-		m_drive.arcadeDrive(-xSpeed/4, zRotate/4, squareInputs);
+		m_drive.arcadeDrive(-xSpeed/2, zRotate/2, squareInputs);
 	}
 
   /**

@@ -8,7 +8,7 @@ import frc.robot.Robot;
 public class RampyDrop extends Subsystem {
     DoubleSolenoid doubleSolenoid = new DoubleSolenoid(Config.RAMP_PORT_2, Config.RAMP_PORT_3);
     boolean usingRaam = false;
-
+    
     @Override
     public void periodic() {
         super.periodic();

@@ -6,6 +6,7 @@ import org.opencv.core.Point;
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
@@ -30,8 +31,8 @@ public class CameraSubsystem extends Subsystem {
         if (m_visionThread == null) {
             m_visionThread = new Thread(() -> {
                 // Get the Axis camera from CameraServer
-                AxisCamera camera = CameraServer.getInstance().addAxisCamera(Config.CAMERA_ADDRESS);
-
+                // AxisCamera camera = CameraServer.getInstance().addAxisCamera(Config.CAMERA_ADDRESS);
+                UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();                
                 // Set the resolution
                 camera.setResolution(WIDTH, HEIGHT);
 
@@ -75,7 +76,7 @@ public class CameraSubsystem extends Subsystem {
         HUD hud = HUD.with(mat);
 
         hud
-                .color(HUD.WHITE)
+                .color(HUD.GREEN)
                 .thickness(HUD.THIN)
         // Put a halfway line
                 .line(HUD.point(WIDTH/2, 0), HUD.point(WIDTH/2, HEIGHT))
@@ -87,9 +88,12 @@ public class CameraSubsystem extends Subsystem {
 
         // detect center drop
 //        CenterDropDetection.DetectionResult result = detector.detect(mat);
-        boolean detected = false;
-        hud .color(detected ? HUD.GREEN : HUD.RED)
-            .circle(HUD.point(30,30), 10);
+        // boolean detected = false;
+        // hud .color(detected ? HUD.GREEN : HUD.RED)
+        //     .circle(HUD.point(30,30), 10);
+
+        // Line sensor HUD
+        Robot.lineSensor.updateHUD(mat);
 
         //hud.add(Robot.lifty);
 
