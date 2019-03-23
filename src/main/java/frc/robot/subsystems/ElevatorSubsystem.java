@@ -18,15 +18,31 @@ public class ElevatorSubsystem extends Subsystem{
         elevateup();
     }
 
-    public void elevateup(){
+    public void elevateup() {
         if(Robot.m_oi.xbox.getBumper(Hand.kRight)){
-            elevatorMotor.set(Config.ELEVATOR_MOTOR_SPEED_UP);
+            goUp();
         }
         else if(Robot.m_oi.xbox.getBumper(Hand.kLeft)){
-            elevatorMotor.set(Config.ELEVATOR_MOTOR_SPEED_DOWN);
+            goDown();
         }
         else{
-            elevatorMotor.set(Config.ELEVATOR_MOTOR_STAY);
+            stay();
         }
+    }
+
+    public void goUp() {
+        go(Config.ELEVATOR_MOTOR_SPEED_UP);
+    }
+
+    public void goDown() {
+        go(Config.ELEVATOR_MOTOR_SPEED_DOWN);
+    }
+
+    public void stay() {
+        go(Config.ELEVATOR_MOTOR_STAY);
+    }
+
+    public void go(double speed) {
+        elevatorMotor.set(speed);
     }
 }

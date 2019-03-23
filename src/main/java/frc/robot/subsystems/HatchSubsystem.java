@@ -16,27 +16,26 @@ public class HatchSubsystem extends Subsystem {
     @Override
     public void periodic() {
         super.periodic();
-        open();
+        if(usingHatch){
+            opened();
+        }
+        else{
+            closed();
+        }
     }
 
     @Override
     protected void initDefaultCommand() {}
 
-    public void open(){
-        if(Robot.m_oi.xbox.getBButtonPressed()){
-            usingHatch = !usingHatch;
-        }
-
-        if(usingHatch){
-           doubleSolenoid.set(Value.kForward);
-        }
-        else{
-        closed();
-        }
+    public void opened() {
+        doubleSolenoid.set(Value.kForward);
     }
-   
+
     public void closed(){
         doubleSolenoid.set(Value.kReverse);
     }
 
+    public void toggleHatch() {
+        usingHatch = !usingHatch;
+    }
 }

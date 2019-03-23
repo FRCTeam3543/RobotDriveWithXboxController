@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Config;
 
@@ -16,7 +17,16 @@ import frc.robot.subsystems.Config;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public XboxController xbox = new XboxController(Config.XBOX_PORT);
+
+    public static final int JOYSTICK_ELEVATOR_UP = 6;
+    public static final int JOYSTICK_ELEVATOR_DOWN = 4;
+    public static final int JOYSTICK_BALL_INTAKE = 2;
+    public static final int JOYSTICK_RAMP_DEPLOY_1 = 11;
+    public static final int JOYSTICK_RAMP_DEPLOY_2 = 12;
+
+
+    public XboxController xbox = new XboxController(Config.XBOX_PORT);
+//	public Joystick joystick = new Joystick(Config.JOYSTICK_PORT);
 
 	// Instantiaion of Xbox
 	public XboxController getJoystick() {
@@ -24,10 +34,17 @@ public class OI {
 	  }
 
 	void loop() {
-		if (xbox.getYButtonPressed()) {
-			Robot.driveSystem.reset();
-		}
+		checkReset();
+		elevatorControl();
+		hatchControl();
+		rampControl();
 	}
+
+	void checkReset() {
+        if (xbox.getYButtonPressed()) {
+            Robot.driveSystem.reset();
+        }
+    }
 
 	/**
 	 * Make the controller rumble
@@ -39,12 +56,61 @@ public class OI {
 	void arcadeDrive() {
 		// tricky
 		double mag = xbox.getRawAxis(1);
-		double turn =  xbox.getRawAxis(0);
+		double turn =  - xbox.getRawAxis(0); // needs to be backward
 		double throttle = 1 - Math.abs(xbox.getRawAxis(5)); // 0 to 1
 		throttle = throttle * (1 - Config.THROTTLE_MIN) + Config.THROTTLE_MIN;
 		// adjust magnitude and turn by the throttle value
-		Robot.arcadeDrive(mag * throttle,  turn * throttle * 1.5, false);
+        double throttleMult = 1; // 1.5
+		Robot.arcadeDrive(mag * throttle,  turn * throttle * throttleMult, false);
 	}
-}
-	
 
+    /**
+     * Controls the elevator lift with the xbox bumpers OR Joystick up/down
+     */
+	void elevatorControl()
+	{
+        if(xbox.getBumper(GenericHID.Hand.kRight)
+//                || joystick.getRawButton(JOYSTICK_ELEVATOR_UP)
+        ){
+            Robot.elevator.goUp();
+        }
+        else if (Robot.m_oi.xbox.getBumper(GenericHID.Hand.kLeft)
+//                || joystick.getRawButton(JOYSTICK_ELEVATOR_DOWN)
+        ){
+            Robot.elevator.goDown();
+        }
+        else {
+            Robot.elevator.stay();
+        }
+	}
+
+    void hatchControl() {
+        if(xbox.getBButtonPressed()){
+            Robot.Hatch.toggleHatch();
+        }
+    }
+
+    void rampControl() {
+        if (
+            (Robot.m_oi.xbox.getStartButton() && Robot.m_oi.xbox.getBackButton())
+            ||
+            (getJoystickButton(JOYSTICK_RAMP_DEPLOY_1) && getJoystickButton(JOYSTICK_RAMP_DEPLOY_2))
+        ) {
+            Robot.Rampy.toggleRaam();
+        }
+    }
+    /**
+     * Ball shooter control
+     */
+    public boolean getJoystickButton(int num)
+    {
+        return false;
+//        return joystick.getRawButton(num);
+    }
+
+    public boolean getTrigger()
+    {
+        return false;
+//        return joystick.getTrigger();
+    }
+}

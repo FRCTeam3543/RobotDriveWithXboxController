@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 public class Config {
     ////// OPERATOR INTERFACE //////
     public static final int XBOX_PORT  = 0;
+    public static final int JOYSTICK_PORT = 1;
 
     ////// VISION //////
     // should be http://10.35.43.11/axis-cgi/mjpg/video.cgi
@@ -21,7 +22,7 @@ public class Config {
     
     ///Elevator (Temp)///
     public static final int ELEVATOR_MOTOR_PORT = 7; 
-    public static final double ELEVATOR_MOTOR_SPEED_UP = 0.5;
+    public static final double ELEVATOR_MOTOR_SPEED_UP = 1;
     public static final double ELEVATOR_MOTOR_STAY = 0.1;
     public static final double ELEVATOR_MOTOR_SPEED_DOWN = -0.5;
 
@@ -57,14 +58,13 @@ public class Config {
     public static final double DRIVE_LEFT_QUAD_DPP = 0.00003844376;    // meters per pulse, measured 2/9/19
     public static final double DRIVE_RIGHT_QUAD_DPP = -DRIVE_LEFT_QUAD_DPP;
 
-
     /////////////////////////////////
     ///////// Ball Subsytem /////////
     /////////////////////////////////
     public static final int BALL_PICKUP_MOTOR_PORT_2 = 5;
     public static final int BALL_PICKUP_MOTOR_PORT_1 = 2;
-    public static final double BALL_PICKUP_MOTOR_SPEED = 0.5;
-    public static final double BALL_SHOOT_MOTOR_SPEED = 1.0;
+    public static final double BALL_PICKUP_MOTOR_SPEED = -0.5; // these are backward now
+    public static final double BALL_SHOOT_MOTOR_SPEED = -1.0;
 
     // Digital Ports
     public static final int BALL_PICKUP_SWITCH_PORT = 1;

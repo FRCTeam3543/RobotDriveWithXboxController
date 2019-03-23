@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import frc.robot.OI;
 import frc.robot.Robot;
 
 public class BallSubsystem extends Subsystem {
-    
 
     WPI_TalonSRX motor = new WPI_TalonSRX(Config.BALL_PICKUP_MOTOR_PORT_1);
     WPI_TalonSRX motor1 = new WPI_TalonSRX(Config.BALL_PICKUP_MOTOR_PORT_2);
@@ -33,7 +33,7 @@ public class BallSubsystem extends Subsystem {
         if (isLockAndLoad() && !hasABall()) {
             grab();
         }
-        else if(Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft) > 0.55){
+        else if(isShootTriggerPressed()){
             shoot();
         }
         else {
@@ -47,6 +47,12 @@ public class BallSubsystem extends Subsystem {
     void startShooting() {
         shootStartTime = System.currentTimeMillis();
         shoot();
+    }
+
+    boolean isShootTriggerPressed() {
+        return Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft) > 0.55
+//                || Robot.m_oi.getTrigger()
+        ;
     }
 
     boolean isShooting() {
@@ -64,7 +70,10 @@ public class BallSubsystem extends Subsystem {
     }
 
     boolean isLockAndLoad() {
-        return (Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) > 0.35);
+        return (
+                Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) > 0.35
+//            ||  Robot.m_oi.getJoystickButton(OI.JOYSTICK_BALL_INTAKE)
+        );
     }
 
     boolean hasABall() {

@@ -69,7 +69,6 @@ public class CameraSubsystem extends Subsystem {
         }
     }
 
-
     public static final int THIN = 1;
 
     void addHUD(Mat mat) {
@@ -86,20 +85,8 @@ public class CameraSubsystem extends Subsystem {
                 .rectangle(HUD.point(WIDTH/2 - 60, HEIGHT-20-120),
                                 HUD.point(WIDTH/2 + 60, HEIGHT-20));
 
-        // detect center drop
-//        CenterDropDetection.DetectionResult result = detector.detect(mat);
-        // boolean detected = false;
-        // hud .color(detected ? HUD.GREEN : HUD.RED)
-        //     .circle(HUD.point(30,30), 10);
-
         // Line sensor HUD
         Robot.lineSensor.updateHUD(mat);
-
-        //hud.add(Robot.lifty);
-
-//        if (result.detected) {
-//            result.plot(mat);
-//        }
 
         // Plot the path of the ball, when you have one
     }
