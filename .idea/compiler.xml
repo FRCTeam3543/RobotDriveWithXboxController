@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="RobotDriveWithXboxController.main" target="11" />
-      <module name="RobotDriveWithXboxController.test" target="11" />
+      <module name="RobotDriveWithXboxController_main" target="1.10" />
+      <module name="RobotDriveWithXboxController_test" target="1.10" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -8,14 +8,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import frc.robot.OI;
 import frc.robot.Robot;
+import org.opencv.core.Mat;
 
-public class BallSubsystem extends Subsystem {
+public class BallSubsystem extends Subsystem implements HUDProvider {
 
     WPI_TalonSRX motor = new WPI_TalonSRX(Config.BALL_PICKUP_MOTOR_PORT_1);
     WPI_TalonSRX motor1 = new WPI_TalonSRX(Config.BALL_PICKUP_MOTOR_PORT_2);
     DigitalInput hasBallSwitch = new DigitalInput(Config.BALL_PICKUP_SWITCH_PORT);
     
     boolean enabled = false;
+
+    boolean lockAndLoad = false;
 
     public BallSubsystem() {
         super();
@@ -49,6 +52,10 @@ public class BallSubsystem extends Subsystem {
         shoot();
     }
 
+    public void toggleLockAndLoad() {
+        lockAndLoad = !lockAndLoad;
+    }
+
     boolean isShootTriggerPressed() {
         return Robot.m_oi.xbox.getTriggerAxis(Hand.kLeft) > 0.55
 //                || Robot.m_oi.getTrigger()
@@ -60,6 +67,7 @@ public class BallSubsystem extends Subsystem {
     }
 
     void shoot() {
+        lockAndLoad = false;
         motor.set(Config.BALL_SHOOT_MOTOR_SPEED);
         motor1.set(-Config.BALL_SHOOT_MOTOR_SPEED);    
     }
@@ -70,10 +78,7 @@ public class BallSubsystem extends Subsystem {
     }
 
     boolean isLockAndLoad() {
-        return (
-                Robot.m_oi.xbox.getTriggerAxis(Hand.kRight) > 0.35
-//            ||  Robot.m_oi.getJoystickButton(OI.JOYSTICK_BALL_INTAKE)
-        );
+        return lockAndLoad;
     }
 
     boolean hasABall() {
@@ -118,5 +123,13 @@ public class BallSubsystem extends Subsystem {
         addChild(hasBallSwitch);
         setName("Ball Pickup Subsystem");
         LiveWindow.add(this);
+    }
+
+    @Override
+    public void updateHUD(Mat mat) {
+        HUD.with(mat)
+                .thickness(5)
+                .color(hasABall() ? HUD.GREEN : HUD.WHITE)
+                .circle(HUD.point(CameraSubsystem.WIDTH - 50, 25), 10);
     }
 }

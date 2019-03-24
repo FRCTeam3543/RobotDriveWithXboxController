@@ -43,6 +43,8 @@ public class Config {
     public static final int DRIVELINE_RIGHT_FRONT_MOTOR_PORT 		= 1;
     public static final int DRIVELINE_RIGHT_REAR_MOTOR_PORT 		= 3;
 
+    public static final double MOTOR_TRIM = 0.75;
+
     ////////////////////////////////////
     ///////// Hatch Pneumatics /////////
     ////////////////////////////////////

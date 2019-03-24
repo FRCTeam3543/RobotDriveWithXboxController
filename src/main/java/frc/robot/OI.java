@@ -38,6 +38,7 @@ public class OI {
 		elevatorControl();
 		hatchControl();
 		rampControl();
+		ballIntakeControl();
 	}
 
 	void checkReset() {
@@ -64,6 +65,15 @@ public class OI {
 		Robot.arcadeDrive(mag * throttle,  turn * throttle * throttleMult, false);
 	}
 
+	void ballIntakeControl()
+    {
+//        if (Robot.m_oi.xbox.getTriggerAxis(GenericHID.Hand.kRight) > 0.35) {
+//
+//        }
+        if (xbox.getAButtonPressed()) {
+            Robot.bally.toggleLockAndLoad();
+        }
+    }
     /**
      * Controls the elevator lift with the xbox bumpers OR Joystick up/down
      */

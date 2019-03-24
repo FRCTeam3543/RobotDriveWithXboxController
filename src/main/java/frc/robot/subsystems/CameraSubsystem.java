@@ -87,6 +87,8 @@ public class CameraSubsystem extends Subsystem {
 
         // Line sensor HUD
         Robot.lineSensor.updateHUD(mat);
+        Robot.bally.updateHUD(mat);
+        Robot.Hatch.updateHUD(mat);
 
         // Plot the path of the ball, when you have one
     }
