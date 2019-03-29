@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RobotDriveWithXboxController.iml" filepath="$PROJECT_DIR$/RobotDriveWithXboxController.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController.main.iml" filepath="$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController.test.iml" filepath="$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController_main.iml" filepath="$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController_main.iml" group="RobotDriveWithXboxController" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController_test.iml" filepath="$PROJECT_DIR$/.idea/modules/RobotDriveWithXboxController_test.iml" group="RobotDriveWithXboxController" />
     </modules>
   </component>
 </project>

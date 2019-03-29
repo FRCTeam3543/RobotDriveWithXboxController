@@ -12,22 +12,18 @@ public class RampyDrop extends Subsystem {
     @Override
     public void periodic() {
         super.periodic();
-        open();
+        if(usingRaam){
+            doubleSolenoid.set(Value.kForward);
+        }
+        else {
+            doubleSolenoid.set(Value.kReverse);
+        }
     }
 
     @Override
     protected void initDefaultCommand() {}
 
-    public void open(){
-        if(Robot.m_oi.xbox.getStartButton() && Robot.m_oi.xbox.getBackButton()){
-            usingRaam = !usingRaam;
-        }
-
-        if(usingRaam){
-           doubleSolenoid.set(Value.kForward);
-        }
-        else{
-            doubleSolenoid.set(Value.kReverse);
-        }
+    public void toggleRaam() {
+        usingRaam = !usingRaam;
     }
 }

@@ -46,7 +46,7 @@ public class LineSensor extends Subsystem implements HUDProvider {
         HUD.with(mat)
             .color(isLeftEnabled() ? HUD.GREEN : HUD.RED)
             .thickness(4)
-            .circle(HUD.point(10, 20), 10)
+            .circle(HUD.point(25, 20), 10)
             .color(isRightEnabled() ? HUD.GREEN : HUD.RED)
             .circle(HUD.point(50, 20), 10);
 	}

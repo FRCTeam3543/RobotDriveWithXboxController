@@ -119,6 +119,7 @@ public class Robot extends TimedRobot {
     Rampy.periodic();
     elevator.periodic();
     // if the ball pickup is enabled, this will run it
+    bally.periodic();
     Hatch.periodic();
 
     if (m_oi.xbox.getXButtonPressed()) {
