@@ -7,23 +7,32 @@ import frc.robot.Robot;
 
 public class RampyDrop extends Subsystem {
     DoubleSolenoid doubleSolenoid = new DoubleSolenoid(Config.RAMP_PORT_2, Config.RAMP_PORT_3);
-    boolean usingRaam = false;
+    // boolean usingRaam = false;
     
     @Override
     public void periodic() {
         super.periodic();
-        if(usingRaam){
-            doubleSolenoid.set(Value.kForward);
-        }
-        else {
-            doubleSolenoid.set(Value.kReverse);
-        }
+        // if(usingRaam){
+        //     doubleSolenoid.set(Value.kForward);
+        // }
+        // else {
+        //     doubleSolenoid.set(Value.kReverse);
+        // }
+    }
+
+    public void open() {
+        doubleSolenoid.set(Value.kForward);
+
+    }
+
+    public void close() {
+        doubleSolenoid.set(Value.kReverse);
     }
 
     @Override
     protected void initDefaultCommand() {}
 
-    public void toggleRaam() {
-        usingRaam = !usingRaam;
-    }
+    // public void toggleRaam() {
+    //     // usingRaam = !usingRaam;
+    // }
 }

@@ -57,12 +57,16 @@ public class OI {
 	void arcadeDrive() {
 		// tricky
 		double mag = xbox.getRawAxis(1);
-		double turn =  - xbox.getRawAxis(0); // needs to be backward
+        double turn =  - xbox.getRawAxis(0); // needs to be backward
+        if (Math.abs(turn) < 0.05) { // +/- 5% rounds to zero
+            turn = 0;
+        }
 		double throttle = 1 - Math.abs(xbox.getRawAxis(5)); // 0 to 1
 		throttle = throttle * (1 - Config.THROTTLE_MIN) + Config.THROTTLE_MIN;
 		// adjust magnitude and turn by the throttle value
         double throttleMult = 1; // 1.5
-		Robot.arcadeDrive(mag * throttle,  turn * throttle * throttleMult, false);
+        double throttleOffset = 0.2;
+		Robot.arcadeDrive(mag * throttle,  turn * throttle * throttleMult + throttleOffset, false);
 	}
 
 	void ballIntakeControl()
@@ -103,10 +107,14 @@ public class OI {
     void rampControl() {
         if (
             (Robot.m_oi.xbox.getStartButton() && Robot.m_oi.xbox.getBackButton())
-            ||
-            (getJoystickButton(JOYSTICK_RAMP_DEPLOY_1) && getJoystickButton(JOYSTICK_RAMP_DEPLOY_2))
+            // ||
+            // (getJoystickButton(JOYSTICK_RAMP_DEPLOY_1) && getJoystickButton(JOYSTICK_RAMP_DEPLOY_2)
+            // )
         ) {
-            Robot.Rampy.toggleRaam();
+            Robot.Rampy.open();
+        }
+        else {
+            Robot.Rampy.close();
         }
     }
     /**
